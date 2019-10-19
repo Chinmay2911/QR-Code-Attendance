@@ -1,0 +1,29 @@
+function doGet(e){
+
+  var ss = SpreadsheetApp.openByUrl("your gsheet link here");
+  var sheet = ss.getSheetByName("Sheet1");
+ return insert(e,sheet);
+
+
+}
+
+function doPost(e){
+  var ss = SpreadsheetApp.openByUrl("Your gsheet link here");
+  var sheet = ss.getSheetByName("Sheet1");
+  return insert(e,sheet);
+
+}
+
+function insert(e,sheet) {
+
+  var scannedData = e.parameter.sdata;
+ var d = new Date();
+  var ctime =  d.toLocaleString();
+  
+  sheet.appendRow([scannedData,ctime]);
+  
+  return ContentService
+  .createTextOutput("Success")
+  .setMimeType(ContentService.MimeType.JAVASCRIPT);  
+ 
+}
